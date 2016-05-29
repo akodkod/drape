@@ -1,0 +1,1 @@
+yardoc 'lib/drape/**/*.rb' -m markdown --no-private

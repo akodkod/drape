@@ -1,0 +1,10 @@
+language: ruby
+
+services:
+  - mongodb
+
+rvm:
+  - 2.3.0
+
+env:
+  - "RAILS_VERSION=5.0"

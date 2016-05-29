@@ -1,0 +1,16 @@
+development:
+  clients:
+    default:
+      database: dummy_development
+      hosts:
+        - localhost:27017
+test:
+  clients:
+    default:
+      database: dummy_test
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1

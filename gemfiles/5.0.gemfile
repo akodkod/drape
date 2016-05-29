@@ -1,0 +1,8 @@
+gem "rails", ">= 5.0.rc1"
+gem "mongoid", github: "mongodb/mongoid"
+gem "devise", github: "plataformatec/devise"
+gem "minitest-rails", github: "blowmage/minitest-rails", branch: "rails5"
+
+group :development, :test do
+  gem 'listen'
+end
