@@ -1,8 +1,7 @@
-require "./performance/models"
+require './performance/models'
 class ProductDecorator < Drape::Decorator
-
   def awesome_title
-    "Awesome Title"
+    'Awesome Title'
   end
 
   # Original #method_missing
@@ -17,13 +16,11 @@ class ProductDecorator < Drape::Decorator
       super
     end
   end
-
 end
 
 class FastProductDecorator < Drape::Decorator
-
   def awesome_title
-    "Awesome Title"
+    'Awesome Title'
   end
 
   # Modified #method_missing
@@ -33,7 +30,7 @@ class FastProductDecorator < Drape::Decorator
         self.class.send :define_method, method do |*inner_args, &inner_block|
           model.send(method, *inner_args, &inner_block)
         end
-        self.send(method, *args, &block)
+        send(method, *args, &block)
       rescue NoMethodError
         super
       end
@@ -41,5 +38,4 @@ class FastProductDecorator < Drape::Decorator
       super
     end
   end
-
 end

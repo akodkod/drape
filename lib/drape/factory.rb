@@ -51,7 +51,7 @@ module Drape
         return decorator_method(decorator_class) if decorator_class
         return object_decorator if decoratable?
         return decorator_method(Drape::CollectionDecorator) if collection?
-        raise Drape::UninferrableDecoratorError.new(object.class)
+        raise Drape::UninferrableDecoratorError, object.class
       end
 
       private
@@ -60,7 +60,7 @@ module Drape
 
       def object_decorator
         if collection?
-          ->(object, options) { object.decorator_class.decorate_collection(object, options.reverse_merge(with: nil))}
+          ->(object, options) { object.decorator_class.decorate_collection(object, options.reverse_merge(with: nil)) }
         else
           ->(object, options) { object.decorate(options) }
         end

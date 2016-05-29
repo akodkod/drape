@@ -50,7 +50,7 @@ describe PostDecorator do
 
   it 'serializes to JSON' do
     json = decorator.to_json
-    expect(json).to match /"updated_at":"overridden"/
+    expect(json).to include('"updated_at":"overridden"')
   end
 
   it 'serializes to XML' do

@@ -51,6 +51,5 @@ module Drape
       private :delegatable?
       private_class_method :delegatable?
     end
-
   end
 end

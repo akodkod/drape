@@ -2,7 +2,6 @@ module Drape
   module ViewContext
     # @private
     module BuildStrategy
-
       def self.new(name, &block)
         const_get(name.to_s.camelize).new(&block)
       end
@@ -42,7 +41,6 @@ module Drape
           end
         end
       end
-
     end
   end
 end

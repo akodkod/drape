@@ -85,19 +85,19 @@ module Drape
 
     # @deprecated Use {controller} instead.
     def self.current_controller
-      ActiveSupport::Deprecation.warn("Drape::ViewContext.current_controller is deprecated (use controller instead)", caller)
-      self.controller || ApplicationController.new
+      ActiveSupport::Deprecation.warn('Drape::ViewContext.current_controller is deprecated (use controller instead)', caller)
+      controller || ApplicationController.new
     end
 
     # @deprecated Use {controller=} instead.
     def self.current_controller=(controller)
-      ActiveSupport::Deprecation.warn("Drape::ViewContext.current_controller= is deprecated (use controller instead)", caller)
+      ActiveSupport::Deprecation.warn('Drape::ViewContext.current_controller= is deprecated (use controller instead)', caller)
       self.controller = controller
     end
 
     # @deprecated Use {build} instead.
     def self.build_view_context
-      ActiveSupport::Deprecation.warn("Drape::ViewContext.build_view_context is deprecated (use build instead)", caller)
+      ActiveSupport::Deprecation.warn('Drape::ViewContext.build_view_context is deprecated (use build instead)', caller)
       build
     end
   end

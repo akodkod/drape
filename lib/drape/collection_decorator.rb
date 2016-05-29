@@ -34,12 +34,12 @@ module Drape
     end
 
     class << self
-      alias_method :decorate, :new
+      alias decorate new
     end
 
     # @return [Array] the decorated items.
     def decorated_collection
-      @decorated_collection ||= object.map{|item| decorate_item(item)}
+      @decorated_collection ||= object.map { |item| decorate_item(item) }
     end
 
     # Delegated to the decorated collection when using the block form
@@ -49,18 +49,20 @@ module Drape
       if block_given?
         decorated_collection.find(*args, &block)
       else
-        ActiveSupport::Deprecation.warn("Using ActiveRecord's `find` on a CollectionDecorator is deprecated. Call `find` on a model, and then decorate the result", caller)
+        ActiveSupport::Deprecation.warn('Using ActiveRecord\'s `find` on a CollectionDecorator is deprecated. ' +
+                                        'Call `find` on a model, and then decorate the result', caller)
+
         decorate_item(object.find(*args))
       end
     end
 
     def to_s
-      "#<#{self.class.name} of #{decorator_class || "inferred decorators"} for #{object.inspect}>"
+      "#<#{self.class.name} of #{decorator_class || 'inferred decorators'} for #{object.inspect}>"
     end
 
     def context=(value)
       @context = value
-      each {|item| item.context = value } if @decorated_collection
+      each { |item| item.context = value } if @decorated_collection
     end
 
     # @return [true]
@@ -68,12 +70,12 @@ module Drape
       true
     end
 
-    alias_method :decorated_with?, :instance_of?
+    alias decorated_with? instance_of?
 
     def kind_of?(klass)
-      decorated_collection.kind_of?(klass) || super
+      decorated_collection.is_a?(klass) || super
     end
-    alias_method :is_a?, :kind_of?
+    alias is_a? kind_of?
 
     def replace(other)
       decorated_collection.replace(other)

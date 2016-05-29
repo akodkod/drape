@@ -9,9 +9,9 @@ module Drape
 
     # @return the object being decorated.
     attr_reader :object
-    alias_method :model, :object
-    alias_method :source, :object # TODO: deprecate this
-    alias_method :to_source, :object # TODO: deprecate this
+    alias model object
+    alias source object # TODO: deprecate this
+    alias to_source object # TODO: deprecate this
 
     # @return [Hash] extra data to be used in user-defined methods.
     attr_accessor :context
@@ -35,7 +35,7 @@ module Drape
     end
 
     class << self
-      alias_method :decorate, :new
+      alias decorate new
     end
 
     # Automatically delegates instance methods to the source object. Class
@@ -77,8 +77,8 @@ module Drape
     end
 
     class << self # TODO deprecate this
-      alias_method :source_class, :object_class
-      alias_method :source_class?, :object_class?
+      alias source_class object_class
+      alias source_class? object_class?
     end
 
     # Automatically decorates ActiveRecord finder methods, so that you can use
@@ -182,7 +182,7 @@ module Drape
 
     # Returns a unique hash for a decorated object based on
     # the decorator class and the object being decorated.
-    # 
+    #
     # @return [Fixnum]
     def hash
       self.class.hash ^ object.hash
@@ -192,27 +192,15 @@ module Drape
     #
     # @param [Class] klass
     def kind_of?(klass)
-      super || object.kind_of?(klass)
+      super || object.is_a?(klass)
     end
-    alias_method :is_a?, :kind_of?
+    alias is_a? kind_of?
 
     # Checks if `self.instance_of?(klass)` or `object.instance_of?(klass)`
     #
     # @param [Class] klass
     def instance_of?(klass)
       super || object.instance_of?(klass)
-    end
-
-    if RUBY_VERSION < "2.0"
-      # nasty hack to stop 1.9.x using the delegated `to_s` in `inspect`
-      alias_method :_to_s, :to_s
-
-      def inspect
-        ivars = instance_variables.map do |name|
-          "#{name}=#{instance_variable_get(name).inspect}"
-        end
-        _to_s.insert(-2, " #{ivars.join(", ")}")
-      end
     end
 
     delegate :to_s
@@ -229,7 +217,7 @@ module Drape
     # @return [Hash] the object's attributes, sliced to only include those
     # implemented by the decorator.
     def attributes
-      object.attributes.select {|attribute, _| respond_to?(attribute) }
+      object.attributes.select { |attribute, _| respond_to?(attribute) }
     end
 
     # ActiveModel compatibility
@@ -258,7 +246,7 @@ module Drape
 
     def self.object_class_name
       raise NameError if name.nil? || name.demodulize !~ /.+Decorator$/
-      name.chomp("Decorator")
+      name.chomp('Decorator')
     end
 
     def self.inferred_object_class
@@ -266,7 +254,7 @@ module Drape
       name.constantize
     rescue NameError => error
       raise if name && !error.missing_name?(name)
-      raise Drape::UninferrableSourceError.new(self)
+      raise Drape::UninferrableSourceError, self
     end
 
     def self.collection_decorator_name
@@ -279,10 +267,11 @@ module Drape
 
     def handle_multiple_decoration(options)
       if object.applied_decorators.last == self.class
-        @context = object.context unless options.has_key?(:context)
+        @context = object.context unless options.key?(:context)
         @object = object.object
       else
-        warn "Reapplying #{self.class} decorator to target that is already decorated with it. Call stack:\n#{caller(1).join("\n")}"
+        warn "Reapplying #{self.class} decorator to target that is already decorated with it. " +
+             "Call stack:\n#{caller(1).join("\n")}"
       end
     end
 

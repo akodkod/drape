@@ -5,7 +5,6 @@ module Drape
     extend ActiveSupport::Concern
 
     module ClassMethods
-
       # Access the helpers proxy to call built-in and user-defined
       # Rails helpers from a class context.
       #
@@ -13,8 +12,7 @@ module Drape
       def helpers
         Drape::ViewContext.current
       end
-      alias_method :h, :helpers
-
+      alias h helpers
     end
 
     # Access the helpers proxy to call built-in and user-defined
@@ -24,14 +22,13 @@ module Drape
     def helpers
       Drape::ViewContext.current
     end
-    alias_method :h, :helpers
+    alias h helpers
 
     # Alias for `helpers.localize`, since localize is something that's used
     # quite often. Further aliased to `l` for convenience.
     def localize(*args)
       helpers.localize(*args)
     end
-    alias_method :l, :localize
-
+    alias l localize
   end
 end

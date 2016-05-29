@@ -48,7 +48,6 @@ module Drape
     end
 
     module ClassMethods
-
       # Decorates a collection of objects. Used at the end of a scope chain.
       #
       # @example
@@ -79,7 +78,7 @@ module Drape
           superclass.decorator_class
         else
           raise unless error.missing_name?(decorator_name)
-          raise Drape::UninferrableDecoratorError.new(self)
+          raise Drape::UninferrableDecoratorError, self
         end
       end
 
@@ -89,8 +88,6 @@ module Drape
       def ===(other)
         super || (other.respond_to?(:object) && super(other.object))
       end
-
     end
-
   end
 end

@@ -13,13 +13,12 @@ end
 
 module Drape
   class Railtie < Rails::Railtie
-
     config.after_initialize do |app|
       app.config.paths.add 'app/decorators', eager_load: true
 
       if Rails.env.test?
         require 'drape/test_case'
-        require 'drape/test/rspec_integration' if defined?(RSpec) and RSpec.respond_to?(:configure)
+        require 'drape/test/rspec_integration' if defined?(RSpec) && RSpec.respond_to?(:configure)
       end
     end
 
@@ -64,7 +63,7 @@ module Drape
     end
 
     rake_tasks do
-      Dir[File.join(File.dirname(__FILE__),'tasks/*.rake')].each { |f| load f }
+      Dir[File.join(File.dirname(__FILE__), 'tasks/*.rake')].each { |f| load f }
     end
   end
 end

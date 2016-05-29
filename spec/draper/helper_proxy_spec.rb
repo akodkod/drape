@@ -2,8 +2,8 @@ require 'spec_helper'
 
 module Drape
   describe HelperProxy do
-    describe "#initialize" do
-      it "sets the view context" do
+    describe '#initialize' do
+      it 'sets the view context' do
         view_context = double
         helper_proxy = HelperProxy.new(view_context)
 
@@ -11,10 +11,10 @@ module Drape
       end
     end
 
-    describe "#method_missing" do
+    describe '#method_missing' do
       protect_class HelperProxy
 
-      it "proxies methods to the view context" do
+      it 'proxies methods to the view context' do
         view_context = double
         helper_proxy = HelperProxy.new(view_context)
 
@@ -22,16 +22,16 @@ module Drape
         expect(helper_proxy.foo(:passed)).to be :passed
       end
 
-      it "passes blocks" do
+      it 'passes blocks' do
         view_context = double
         helper_proxy = HelperProxy.new(view_context)
 
         view_context.stub(:foo) { |&block| block.call }
-        expect(helper_proxy.foo{:yielded}).to be :yielded
+        expect(helper_proxy.foo { :yielded }).to be :yielded
       end
 
-      it "defines the method for better performance" do
-        helper_proxy = HelperProxy.new(double(foo: "bar"))
+      it 'defines the method for better performance' do
+        helper_proxy = HelperProxy.new(double(foo: 'bar'))
 
         expect(HelperProxy.instance_methods).not_to include :foo
         helper_proxy.foo
@@ -39,22 +39,22 @@ module Drape
       end
     end
 
-    describe "#respond_to_missing?" do
-      it "allows #method to be called on the view context" do
-        helper_proxy = HelperProxy.new(double(foo: "bar"))
+    describe '#respond_to_missing?' do
+      it 'allows #method to be called on the view context' do
+        helper_proxy = HelperProxy.new(double(foo: 'bar'))
 
         expect(helper_proxy.respond_to?(:foo)).to be_truthy
       end
     end
 
-    describe "proxying methods which are overriding" do
-      it "proxies :capture" do
+    describe 'proxying methods which are overriding' do
+      it 'proxies :capture' do
         view_context = double
         helper_proxy = HelperProxy.new(view_context)
 
         allow(view_context).to receive(:capture) { |*args, &block| [*args, block.call] }
-        expect(helper_proxy.capture(:first_arg, :second_arg){:yielded}).to \
-          be_eql [:first_arg, :second_arg, :yielded]
+        expect(helper_proxy.capture(:first_arg, :second_arg) { :yielded })
+            .to be_eql [:first_arg, :second_arg, :yielded]
       end
     end
   end

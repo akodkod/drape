@@ -5,7 +5,7 @@ require 'action_controller'
 require 'action_controller/test_case'
 
 RSpec.configure do |config|
-  config.expect_with(:rspec) {|c| c.syntax = :expect}
+  config.expect_with(:rspec) { |c| c.syntax = :expect }
   config.order = :random
   config.mock_with :rspec do |mocks|
     mocks.yield_receiver_to_any_instance_implementation_blocks = true

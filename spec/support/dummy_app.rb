@@ -42,9 +42,10 @@ class DummyApp
           begin
             TCPSocket.new(localhost, port)
           rescue Errno::ECONNREFUSED
-          else
-            started = true
+            next
           end
+
+          started = true
         end
 
         raise "Server failed to start:\n#{output}" unless started

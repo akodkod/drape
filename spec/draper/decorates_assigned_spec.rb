@@ -16,8 +16,8 @@ module Drape
       end
     end
 
-    describe ".decorates_assigned" do
-      it "adds helper methods" do
+    describe '.decorates_assigned' do
+      it 'adds helper methods' do
         controller_class.decorates_assigned :article, :author
 
         expect(controller_class.instance_methods).to include :article
@@ -27,33 +27,33 @@ module Drape
         expect(controller_class.helper_methods).to include :author
       end
 
-      it "creates a factory" do
+      it 'creates a factory' do
         Factory.should_receive(:new).once
         controller_class.decorates_assigned :article, :author
       end
 
-      it "passes options to the factory" do
-        options = {foo: "bar"}
+      it 'passes options to the factory' do
+        options = { foo: 'bar' }
 
         Factory.should_receive(:new).with(options)
         controller_class.decorates_assigned :article, :author, options
       end
 
-      describe "the generated method" do
-        it "decorates the instance variable" do
+      describe 'the generated method' do
+        it 'decorates the instance variable' do
           object = double
           factory = double
           Factory.stub new: factory
 
           controller_class.decorates_assigned :article
           controller = controller_class.new
-          controller.instance_variable_set "@article", object
+          controller.instance_variable_set '@article', object
 
           factory.should_receive(:decorate).with(object, context_args: controller).and_return(:decorated)
           expect(controller.article).to be :decorated
         end
 
-        it "memoizes" do
+        it 'memoizes' do
           factory = double
           Factory.stub new: factory
 
@@ -66,6 +66,5 @@ module Drape
         end
       end
     end
-
   end
 end
