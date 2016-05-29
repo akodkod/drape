@@ -114,7 +114,7 @@ Decorators are the ideal place to:
 Add Drape to your Gemfile:
 
 ```ruby
-gem 'drape', '~> 1.3'
+gem 'drape', '~> 1.0.0.beta1'
 ```
 
 And run `bundle install` within your app's directory.
