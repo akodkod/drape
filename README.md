@@ -1,7 +1,7 @@
 # Drape: View Models for Rails
 
 [![TravisCI Build Status](https://travis-ci.org/MrEmelianenko/drape.svg?branch=master)](http://travis-ci.org/MrEmelianenko/drape)
-[![Code Climate](https://codeclimate.com/github/MrEmelianenko/drape.png)](https://codeclimate.com/github/MrEmelianenko/drape)
+[![Code Climate](https://codeclimate.com/github/MrEmelianenko/drape/badges/gpa.svg)](https://codeclimate.com/github/MrEmelianenko/drape)
 [![Inline docs](http://inch-ci.org/github/MrEmelianenko/drape.svg?branch=master)](http://inch-ci.org/github/MrEmelianenko/drape)
 
 Drape adds an object-oriented layer of presentation logic to your Rails

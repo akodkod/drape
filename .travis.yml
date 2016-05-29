@@ -4,7 +4,11 @@ services:
   - mongodb
 
 rvm:
-  - 2.3.0
+  - 2.3.1
 
 env:
   - "RAILS_VERSION=5.0"
+
+addons:
+    code_climate:
+        repo_token: 85e7394726a531f2ae6520456b1f44488c4c22fc656cda26b843eb2eb4b58612
