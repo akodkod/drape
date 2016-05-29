@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = 'drape'
   s.version     = Drape::VERSION
   s.authors     = ['Andrew Emelianenko', 'Jeff Casimir', 'Steve Klabnik']
-  s.email       = ['jeff@casimircreative.com', 'steve@steveklabnik.com']
-  s.homepage    = 'http://github.com/drapegem/drape'
+  s.email       = ['andrew@soften-it.com', 'jeff@casimircreative.com', 'steve@steveklabnik.com']
+  s.homepage    = 'http://github.com/MrEmelianenko/drape'
   s.summary     = 'View Models for Rails'
   s.description = 'Drape adds an object-oriented layer of presentation logic to your Rails apps.'
   s.license     = 'MIT'
